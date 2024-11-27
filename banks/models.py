@@ -12,9 +12,10 @@ class Bank(models.Model):
 
 
 class Account(models.Model):
+    balance = models.DecimalField(max_digits=10, decimal_places=2)
+
     bank = models.ForeignKey(Bank, on_delete=models.CASCADE, related_name='accounts')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='accounts')
-    balance = models.DecimalField(max_digits=10,decimal_places=2)
 
     def __str__(self):
         return f"Account of {self.user.username} at {self.bank.name}"
