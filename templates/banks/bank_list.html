@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Banks{% endblock %}
+
+{% block content %}
+    <h1>Banks</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Branch</th>
+                <th>Islamic</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bank in banks %}
+                <tr>
+                    <td>{{ bank.name }}</td>
+                    <td>{{ bank.branch }}</td>
+                    <td class="{% if not bank.is_islamic %}no{% endif %}">
+                        {% if bank.is_islamic %}
+                            Yes
+                        {% else %}
+                            No
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
