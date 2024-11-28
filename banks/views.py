@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView as DjangoLoginView
-from .models import  Bank,Account
+from .models import Bank, Account
 
 # Create your views here.
 class BankListView(ListView):
