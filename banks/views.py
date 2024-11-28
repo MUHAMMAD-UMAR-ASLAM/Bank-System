@@ -4,7 +4,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView as DjangoLoginView
 from .models import Bank, Account
 
-# Create your views here.
 class BankListView(ListView):
     model = Bank
     template_name = 'bank_list.html'
