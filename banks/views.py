@@ -16,7 +16,7 @@ class AccountListView(LoginRequiredMixin,ListView):
     context_object_name = 'accounts'
 
     def get_queryset(self):
-        return Account.objects.filter(user=self.request.user)
+        self.request.user.accounts.all()
 
 
 class LoginView(DjangoLoginView):
@@ -29,4 +29,4 @@ class UserAccountListView(LoginRequiredMixin, ListView):
     context_object_name = 'accounts'
 
     def get_queryset(self):
-        return Account.objects.filter(user=self.request.user)
+        return self.request.user.accounts.all()
