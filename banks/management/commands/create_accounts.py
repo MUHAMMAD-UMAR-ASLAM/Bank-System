@@ -1,11 +1,10 @@
-from http.cookiejar import logger
 from django.core.management.base import  BaseCommand
 from banks.models import Bank, Branch, Account
 from django.contrib.auth.models import User
 import logging
 
 
-logger = logging.getLogger('__nane__')
+logger = logging.getLogger('__name__')
 
 
 class Command(BaseCommand):
