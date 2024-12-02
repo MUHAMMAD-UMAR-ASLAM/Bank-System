@@ -1,8 +1,10 @@
 from django.shortcuts import render
+from django.views.decorators.cache import cache_page
 from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView as DjangoLoginView
 from .forms import AccountBalanceUpdateForm, NewAccountForm
+from django.utils.decorators import method_decorator
 from .models import Bank, Account
 from  django.views import View
 from django.shortcuts import get_object_or_404, redirect
@@ -13,6 +15,9 @@ class BankListView(ListView):
     template_name = 'bank_list.html'
     context_object_name = 'banks'
 
+    @method_decorator(cache_page(10))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 class AccountListView(LoginRequiredMixin,ListView):
     model = Account
