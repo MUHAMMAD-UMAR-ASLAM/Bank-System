@@ -8,7 +8,7 @@ class BankSerializer(serializers.ModelSerializer):
         fields = ['name', 'is_islamic', 'branch']
 
 
-class AccountSerializers(serializers.ModelSerializer):
+class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = ['branch', 'balance']

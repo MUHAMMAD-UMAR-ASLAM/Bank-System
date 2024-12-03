@@ -6,16 +6,9 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.cache import cache_page
 from django.views.generic import ListView
-from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, DestroyAPIView, \
-    RetrieveUpdateDestroyAPIView
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.viewsets import ViewSet
-
 from .forms import AccountBalanceUpdateForm, NewAccountForm
 from .models import Bank, Account
-from .searlizers import BankSerializer, AccountSerializers
+
 
 
 class BankListView(ListView):
@@ -87,61 +80,4 @@ class CreateAccountView(LoginRequiredMixin, View):
         return render(request, 'create_account.html', {'form': form})
 
 
-class BankListApiView(APIView):
-    def get(self, request):
-        banks = Bank.objects.all()
-        data = [{'id': bank.id, 'name': bank.name, 'is_islamic': bank.is_islamic} for bank in banks]
-        return Response(data)
 
-
-class BankViewSet(ViewSet):
-    def list(self, request):
-        banks = Bank.objects.all()
-        data = [{'id': bank.id, 'name': bank.name, 'is_islamic': bank.is_islamic} for bank in banks]
-        return Response(data)
-
-
-class BankListGenericView(ListAPIView):
-    queryset = Bank.objects.all()
-    serializer_class = BankSerializer
-
-
-class UserAccountApiView(APIView):
-    def get(self, request):
-        accounts = Account.objects.filter(user=request.user)
-        serializer = AccountSerializers(accounts, many=True)
-        return Response(serializer.data)
-
-
-class CreateBankApiView(CreateAPIView):
-    queryset = Bank.objects.all()
-    serializer_class = BankSerializer
-
-
-class CreateAccountApiView(CreateAPIView):
-    queryset = Account.objects.all()
-    serializer_class = AccountSerializers
-    permission_classes = [IsAuthenticated]
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-
-
-class UpdateAccountApiView(CreateAPIView):
-    queryset = Account.objects.all()
-    serializer_class = AccountSerializers
-
-
-class AccountDetailAPIView(RetrieveAPIView):
-    queryset = Account.objects.all()
-    serializer_class = AccountSerializers
-
-
-class DeleteAccountApiView(DestroyAPIView):
-    queryset = Account.objects.all()
-    serializer_class = AccountSerializers
-
-
-class AccountDetailUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):
-    queryset = Account.objects.all()
-    serializer_class = AccountSerializers
