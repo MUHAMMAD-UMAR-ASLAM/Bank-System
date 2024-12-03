@@ -43,6 +43,8 @@ BUILT_IN_APPS = [
 THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
+    'constance',
+    'constance.backends.database',
 ]
 
 # Custom apps
@@ -60,7 +62,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'banks.middleware.RequestLoggingMiddleware',
+    'banks.middlewares.RequestLoggingMiddleware',
+    'banks.middlewares.MaintenanceModeMiddleware'
 ]
 
 ROOT_URLCONF = 'bank_system.urls'
@@ -91,6 +94,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
 }
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -106,6 +110,12 @@ TEMPLATES = [
         },
     },
 ]
+
+CONSTANCE_CONFIG = {
+    'MAINTENANCE_MODE': (False, 'Enable or disable maintenance mode'),
+}
+
+CONSTANCE_BACKEND = 'constance.backends.memory.MemoryBackend'
 
 WSGI_APPLICATION = 'bank_system.wsgi.application'
 
