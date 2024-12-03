@@ -15,7 +15,7 @@ from .api_views import (
 )
 
 urlpatterns = [
-    # Banks APIs
+    # Bank APIs
     path('banks', BankListApiView.as_view(), name='api_view_banks'),
     path('api/login/', obtain_auth_token, name='api_login'),
     path('banks/api/viewset/', BankViewSet.as_view({'get': 'list'}), name='viewset_banks'),
