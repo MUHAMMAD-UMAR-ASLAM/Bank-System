@@ -6,9 +6,9 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.cache import cache_page
 from django.views.generic import ListView
+
 from .forms import AccountBalanceUpdateForm, NewAccountForm
 from .models import Bank, Account
-
 
 
 class BankListView(ListView):
@@ -78,6 +78,3 @@ class CreateAccountView(LoginRequiredMixin, View):
             new_account.save()
             return redirect('user-account-list')
         return render(request, 'create_account.html', {'form': form})
-
-
-

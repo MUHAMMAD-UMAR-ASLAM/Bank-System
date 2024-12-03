@@ -4,8 +4,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ViewSet
-from .searlizers import BankSerializer, AccountSerializer
+
 from .models import Bank, Account
+from .searlizers import BankSerializer, AccountSerializer
+
+
 class BankListApiView(APIView):
     def get(self, request):
         banks = Bank.objects.all()
