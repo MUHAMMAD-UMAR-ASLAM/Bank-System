@@ -9,7 +9,7 @@ from .models import Bank, Account
 from .searlizers import BankSerializer, AccountSerializer
 
 
-class BankListApiView(APIView):
+class BankListAPIView(APIView):
     def get(self, request):
         banks = Bank.objects.all()
         data = [{'id': bank.id, 'name': bank.name, 'is_islamic': bank.is_islamic} for bank in banks]
@@ -28,19 +28,19 @@ class BankListGenericView(ListAPIView):
     serializer_class = BankSerializer
 
 
-class UserAccountApiView(APIView):
+class UserAccountAPIView(APIView):
     def get(self, request):
         accounts = request.user.accounts.all()
         serializer = AccountSerializer(accounts, many=True)
         return Response(serializer.data)
 
 
-class CreateBankApiView(CreateAPIView):
+class CreateBankAPIView(CreateAPIView):
     queryset = Bank.objects.all()
     serializer_class = BankSerializer
 
 
-class CreateAccountApiView(CreateAPIView):
+class CreateAccountAPIView(CreateAPIView):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
     permission_classes = [IsAuthenticated]
@@ -49,7 +49,7 @@ class CreateAccountApiView(CreateAPIView):
         serializer.save(user=self.request.user)
 
 
-class UpdateAccountApiView(UpdateAPIView):
+class UpdateAccountAPIView(UpdateAPIView):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
     permission_classes = [IsAuthenticated]
@@ -67,7 +67,7 @@ class AccountDetailAPIView(RetrieveAPIView):
         return self.request.user.accounts.all()
 
 
-class DeleteAccountApiView(DestroyAPIView):
+class DeleteAccountAPIView(DestroyAPIView):
     serializer_class = AccountSerializer
     permission_classes = [IsAuthenticated]
 

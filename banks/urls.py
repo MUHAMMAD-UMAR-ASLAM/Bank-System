@@ -13,5 +13,5 @@ urlpatterns = [
     path('user-accounts/', UserAccountListView.as_view(), name='user-account-list'),
     path('account/<int:account_id>/update_balance/', UpdateAccountBalanceView.as_view(), name='update_balance'),
     path('account/<int:account_id>/delete/', DeleteAccountView.as_view(), name='delete_account'),
-    path('account/create/', CreateAccountView.as_view(), name='create_account')
+    path('account/create/', CreateAccountView.as_view(), name='create_account'),
 ]

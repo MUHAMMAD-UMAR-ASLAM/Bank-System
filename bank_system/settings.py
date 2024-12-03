@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from .constance import CONSTANCE_CONFIG, CONSTANCE_BACKEND
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -111,11 +112,7 @@ TEMPLATES = [
     },
 ]
 
-CONSTANCE_CONFIG = {
-    'MAINTENANCE_MODE': (False, 'Enable or disable maintenance mode'),
-}
 
-CONSTANCE_BACKEND = 'constance.backends.memory.MemoryBackend'
 
 WSGI_APPLICATION = 'bank_system.wsgi.application'
 
