@@ -62,8 +62,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'banks.middlewares.RequestLoggingMiddleware',
-    'banks.middlewares.MaintenanceModeMiddleware'
+    'banks.middleware.RequestLoggingMiddleware',
+    'banks.middleware.MaintenanceModeMiddleware'
 ]
 
 ROOT_URLCONF = 'bank_system.urls'
