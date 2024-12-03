@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 
 class Bank(models.Model):
@@ -29,7 +29,3 @@ class Account(models.Model):
 
     def __str__(self):
         return f"Account of {self.user.username} at {self.branch.branch_name}"
-
-
-
-
