@@ -46,6 +46,8 @@ THIRD_PARTY_APPS = [
     'rest_framework.authtoken',
     'constance',
     'constance.backends.database',
+    'django_celery_results',
+    'django_celery_beat',
 ]
 
 # Custom apps
