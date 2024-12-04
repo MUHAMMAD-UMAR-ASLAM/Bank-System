@@ -1,13 +1,14 @@
-from django.shortcuts import render
-from django.views.decorators.cache import cache_page
-from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView as DjangoLoginView
-from .forms import AccountBalanceUpdateForm, NewAccountForm
-from django.utils.decorators import method_decorator
-from .models import Bank, Account
-from  django.views import View
 from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import render
+from django.utils.decorators import method_decorator
+from django.views import View
+from django.views.decorators.cache import cache_page
+from django.views.generic import ListView
+
+from .forms import AccountBalanceUpdateForm, NewAccountForm
+from .models import Bank, Account
 
 
 class BankListView(ListView):
@@ -19,7 +20,8 @@ class BankListView(ListView):
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
 
-class AccountListView(LoginRequiredMixin,ListView):
+
+class AccountListView(LoginRequiredMixin, ListView):
     model = Account
     template_name = 'account_list.html'
     context_object_name = 'accounts'
@@ -41,12 +43,11 @@ class UserAccountListView(LoginRequiredMixin, ListView):
         return self.request.user.accounts.all()
 
 
-class UpdateAccountBalanceView(LoginRequiredMixin,View):
+class UpdateAccountBalanceView(LoginRequiredMixin, View):
     def get(self, request, account_id):
         account = get_object_or_404(Account, id=account_id, user=request.user)
         form = AccountBalanceUpdateForm(instance=account)
         return render(request, 'update_balance.html', {'form': form, 'account': account})
-
 
     def post(self, request, account_id):
         account = get_object_or_404(Account, id=account_id, user=request.user)

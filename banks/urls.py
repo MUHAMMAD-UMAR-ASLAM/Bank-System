@@ -1,6 +1,10 @@
 from django.urls import path
 from .views import BankListView, AccountListView, LoginView, UserAccountListView
-from .views import UpdateAccountBalanceView,DeleteAccountView,CreateAccountView
+from .views import (
+    UpdateAccountBalanceView,
+    DeleteAccountView,
+    CreateAccountView,
+)
 
 urlpatterns = [
     path('banks/', BankListView.as_view(), name='bank-list'),
