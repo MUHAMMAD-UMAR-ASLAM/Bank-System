@@ -7,12 +7,13 @@ from rest_framework.viewsets import ViewSet
 
 from .models import Bank, Account
 from .searlizers import BankSerializer, AccountSerializer
-
+from  .tasks import  add_numbers
 
 class BankListAPIView(APIView):
     def get(self, request):
         banks = Bank.objects.all()
         data = [{'id': bank.id, 'name': bank.name, 'is_islamic': bank.is_islamic} for bank in banks]
+        add_numbers.delay(5,5)
         return Response(data)
 
 
